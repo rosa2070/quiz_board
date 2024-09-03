@@ -16,9 +16,15 @@ public class BoardService {
         return mapper.insert(board);
     }
 
+    public int count() {
+        return mapper.count();
+    }
+
     public List<Board> list(HashMap<String, Object> map) {
         return mapper.list(map);
     }
+
+
 
 
 }

@@ -10,5 +10,6 @@ import java.util.List;
 public interface BoardMapper {
     int insert(Board board);
     List<Board> list(HashMap<String, Object> map);
+    int count();
 
 }

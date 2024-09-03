@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.HashMap;
+
 @Controller
 public class ListController {
     @Autowired private BoardService boardService;
@@ -19,7 +21,22 @@ public class ListController {
 
         int startPage = (page-1)/3*3 + 1;
         int endPage = startPage + 2;
-        int pageCount = (int)Math.ceil();
+        int pageCount = (int)Math.ceil(boardService.count());
+        if (endPage > pageCount) {
+            endPage = pageCount;
+        }
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("startRow", start);
+        map.put("endRow", end);
+
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("pageCount", pageCount);
+        model.addAttribute("list", boardService.list(map));
+        model.addAttribute("page", page);
+
+        return "board/list";
+
 
     }
 
